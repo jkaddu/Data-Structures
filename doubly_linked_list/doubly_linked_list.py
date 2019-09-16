@@ -47,7 +47,16 @@ class DoublyLinkedList:
   as the new head of the list. Don't forget to handle 
   the old head node's previous pointer accordingly."""
   def add_to_head(self, value):
-    pass
+    new_node = ListNode(value, None, None)
+    if not self.head and not self.tail: #we know that its the first node
+      self.head = new_node
+      self.tail = new_node
+    else: #we're inserting at the beginning
+      new_node.next = self.head
+      self.head.prev = new_node
+      self.head = new_node
+
+    self.length += 1
   
   """Removes the List's current head node, making the
   current head's next node the new head of the List.
@@ -55,11 +64,20 @@ class DoublyLinkedList:
   def remove_from_head(self):
     pass
 
-   """Wraps the given value in a ListNode and inserts it 
+  """Wraps the given value in a ListNode and inserts it 
   as the new tail of the list. Don't forget to handle 
   the old tail node's next pointer accordingly."""
   def add_to_tail(self, value):
-    pass
+    new_node = ListNode(value, None, None)
+    if not self.tail and not self.head:
+      self.tail = new_node
+      self.head = new_node
+    else:
+      new_node.prev = self.tail
+      self.tail.next = new_node
+      self.tail = new_node
+
+    self.length += 1
 
   """Removes the List's current tail node, making the 
   current tail's previous node the new tail of the List.
@@ -70,6 +88,9 @@ class DoublyLinkedList:
   """Removes the input node from its current spot in the 
   List and inserts it as the new head node of the List."""
   def move_to_front(self, node):
+    if node is self.head:
+      return
+    value = node.value
     pass
 
   """Removes the input node from its current spot in the 
@@ -84,4 +105,13 @@ class DoublyLinkedList:
     
   """Returns the highest value currently in the list"""
   def get_max(self):
-    pass
+    if not self.head and not self.tail:
+      return None
+    new_val = self.head.value
+    current = self.head
+    while current:
+      if current.value > new_val:
+        max_val = current.value
+      current = current.next
+
+    return new_val
