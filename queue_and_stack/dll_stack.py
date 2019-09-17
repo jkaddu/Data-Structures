@@ -6,13 +6,14 @@ class Stack:
   def __init__(self):
     self.size = 0
     # Why is our DLL a good choice to store our elements?
-    self.storage = 
+    self.storage = []
 
   def push(self, value):
-    pass
+    self.storage.push(value)
   
   def pop(self):
-    pass
+    if len(self.storage):
+      return self.storage.pop(0)
 
   def len(self):
-    pass
+    return len(self.storage)
